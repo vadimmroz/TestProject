@@ -1,21 +1,19 @@
-// features/auth/components/LoginForm.tsx
-
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { container } from 'tsyringe';
-import { AuthService } from '../services/AuthService';
+import {FC, useState, createContext, FormEvent} from 'react';
+import {useNavigate} from 'react-router-dom';
+import {container} from 'tsyringe';
+import {AuthService} from '../services/AuthService';
 
 const authService = container.resolve(AuthService);
 
-const AuthContext = React.createContext({ authService });
+const AuthContext = createContext({authService});
 
-const LoginForm: React.FC = () => {
+const LoginForm: FC = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState<string | null>(null);
 
-    const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError(null);
         try {
@@ -27,7 +25,7 @@ const LoginForm: React.FC = () => {
     };
 
     return (
-        <AuthContext.Provider value={{ authService }}>
+        <AuthContext.Provider value={{authService}}>
             <form onSubmit={handleLogin} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
@@ -71,4 +69,4 @@ const LoginForm: React.FC = () => {
 
 export default LoginForm;
 
-export { AuthContext }; // Експортуємо контекст для використання в інших компонентах
+export {AuthContext}; // Експортуємо контекст для використання в інших компонентах
