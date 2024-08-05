@@ -4,6 +4,7 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 import * as path from 'path'
 import tailwindcss from 'tailwindcss'
 // https://vitejs.dev/config/
+/// <reference types="vitest" />
 export default defineConfig({
     plugins: [react(), tsconfigPaths()],
     resolve: {
@@ -21,4 +22,9 @@ export default defineConfig({
             plugins: [tailwindcss()],
         },
     },
+    // test: defineVitestConfig({
+    //     globals: true,
+    //     environment: 'jsdom',
+    //     setupFiles: './src/setupTests.ts', // файл налаштувань
+    // }),
 })
