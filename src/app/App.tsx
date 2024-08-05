@@ -1,13 +1,16 @@
-import React from 'react';
-import LoginPage from "../pages/LoginPage.tsx";
-import {Route, Routes} from "react-router-dom";
+import { FC } from 'react'
+import { Outlet } from '@tanstack/react-router'
+import Header from '@shared/components/Header.tsx'
 
-const App = () => {
+const App: FC = () => {
     return (
-        <Routes>
-            <Route path="/" element={<LoginPage/>} />
-        </Routes>
-    );
-};
+        <div className="app-container">
+            <Header />
+            <main>
+                <Outlet />
+            </main>
+        </div>
+    )
+}
 
-export default App;
+export default App

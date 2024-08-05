@@ -1,12 +1,16 @@
-import "reflect-metadata"
-import React from 'react'
+import 'reflect-metadata'
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
+import { RouterProvider } from '@tanstack/react-router'
+import { router } from './routes'
 import './index.css'
-import {BrowserRouter} from "react-router-dom";
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { StrictMode } from 'react'
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+const queryClient = new QueryClient()
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+    <StrictMode>
+        <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+        </QueryClientProvider>
+    </StrictMode>
 )
