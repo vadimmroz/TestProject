@@ -3,7 +3,7 @@ import { API_BASE_URL } from '@shared/constants/apiEndpoints.ts'
 
 @injectable()
 export class ApiService {
-    private baseUrl = API_BASE_URL
+    baseUrl = API_BASE_URL
 
     async get<T>(endpoint: string): Promise<T> {
         const response = await fetch(`${this.baseUrl}${endpoint}`)

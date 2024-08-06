@@ -6,9 +6,19 @@ export const useAuth = () => {
     const authService = container.resolve(AuthService)
     const navigation = useNavigate()
     const login = (username: string, password: string) => {
-        return authService
-            .login(username, password)
-            .then(() => navigation({ to: '/home' }))
+        return authService.login(username, password).then(() => {
+            authService.user$
+                .subscribe(
+                    (res) => res && localStorage.setItem('token', res.token)
+                )
+                .unsubscribe()
+            navigation({ to: '/home' })
+        })
+    }
+    const auth = (token: string) => {
+        return authService.auth(token).then(() => {
+            navigation({ to: '/home' })
+        })
     }
 
     const logout = () => {
@@ -18,5 +28,6 @@ export const useAuth = () => {
     return {
         login,
         logout,
+        auth,
     }
 }

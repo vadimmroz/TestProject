@@ -30,6 +30,24 @@ export class AuthService {
         })
     }
 
+    auth(token: string): Promise<void> {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (token === 'fake-jwt-token') {
+                    const user: User = {
+                        id: '1',
+                        name: 'Admin User',
+                        token: 'fake-jwt-token',
+                    }
+                    this.userSubject.next(user)
+                    resolve()
+                } else {
+                    reject(new Error('Invalid credentials'))
+                }
+            }, 1000)
+        })
+    }
+
     logout(): void {
         this.userSubject.next(null)
     }
